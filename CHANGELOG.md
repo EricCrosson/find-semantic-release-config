@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/EricCrosson/find-semantic-release-config/compare/v1.0.2...v1.0.3) (2023-01-13)
+
+
+### Bug Fixes
+
+* search for config file in specified project root ([b591bbd](https://github.com/EricCrosson/find-semantic-release-config/commit/b591bbdaa1305cf34eb5978b91677c3e2d147674))
+
 ## [1.0.2](https://github.com/EricCrosson/find-semantic-release-config/compare/v1.0.1...v1.0.2) (2023-01-13)
 
 
