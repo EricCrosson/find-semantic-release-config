@@ -1,6 +1,6 @@
 [package]
 name = "find-semantic-release-config"
-version = "1.0.0"
+version = "1.0.1"
 edition = "2021"
 authors = ["Eric Crosson <eric.s.crosson@utexas.edu>"]
 description = "Library to locate a project's semantic-release configuration"
