@@ -1,0 +1,22 @@
+[package]
+name = "find-semantic-release-config"
+version = "0.1.0"
+edition = "2021"
+authors = ["Eric Crosson <eric.s.crosson@utexas.edu>"]
+description = "Library for locating a project's semantic-release configuration"
+readme = "README.md"
+repository = "https://github.com/EricCrosson/find-semantic-release-config"
+license = "MIT OR Apache-2.0"
+keywords = ["semantic-release", "config"]
+
+exclude = [
+  ".envrc",
+  "flake.lock",
+  "flake.nix",
+  ".github",
+  ".gitignore"
+]
+
+[dependencies]
+serde_json = "1"
+thiserror = "1"

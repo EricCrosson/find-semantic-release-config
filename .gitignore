@@ -1,2 +1,8 @@
 /.direnv/
 /.pre-commit-config.yaml
+
+
+# Added by cargo
+
+/target
+/Cargo.lock
