@@ -24,43 +24,43 @@ mod error;
 
 use error::Error;
 
-fn find_releaserc_file() -> Option<PathBuf> {
+fn find_releaserc_file(directory: &Path) -> Option<PathBuf> {
     let basename = ".releaserc";
     let extensions: [&str; 6] = ["", ".yaml", ".yml", ".json", ".js", ".cjs"];
 
     for extension in extensions {
         let filename = format!("{basename}{extension}");
-        let path = Path::new(&filename);
+        let path = directory.join(filename);
         trace!("Looking for configuration file {}", path.display());
         if path.exists() {
             debug!("Found semantic-release configuration at {}", path.display());
-            return Some(path.to_owned());
+            return Some(path);
         }
     }
 
     None
 }
 
-fn find_release_config_file() -> Option<PathBuf> {
+fn find_release_config_file(directory: &Path) -> Option<PathBuf> {
     let basename = "release.config";
     let extensions: [&str; 2] = ["js", "cjs"];
 
     for extension in extensions {
         let filename = format!("{basename}.{extension}");
-        let path = Path::new(&filename);
+        let path = directory.join(filename);
         trace!("Looking for configuration file {}", path.display());
         if path.exists() {
             debug!("Found semantic-release configuration at {}", path.display());
-            return Some(path.to_owned());
+            return Some(path);
         }
     }
 
     None
 }
 
-fn does_package_manifest_have_release_property() -> Result<bool, Error> {
+fn does_package_manifest_have_release_property(directory: &Path) -> Result<bool, Error> {
     trace!("Looking for configuration in package.json");
-    let package_manifest_path = Path::new("package.json");
+    let package_manifest_path = directory.join("package.json");
     if !package_manifest_path.exists() {
         return Ok(false);
     }
@@ -69,10 +69,10 @@ fn does_package_manifest_have_release_property() -> Result<bool, Error> {
     // invoking Serde from a BufReader, see
     // https://github.com/serde-rs/json/issues/160
     let mut string = String::new();
-    File::open(package_manifest_path)
-        .map_err(|err| Error::file_open_error(err, package_manifest_path))?
+    File::open(&package_manifest_path)
+        .map_err(|err| Error::file_open_error(err, &package_manifest_path))?
         .read_to_string(&mut string)
-        .map_err(|err| Error::file_read_error(err, package_manifest_path))?;
+        .map_err(|err| Error::file_read_error(err, &package_manifest_path))?;
     let package_manifest: serde_json::Value =
         serde_json::from_str(&string).map_err(|err| Error::file_parse_error(err))?;
 
@@ -95,13 +95,13 @@ fn does_package_manifest_have_release_property() -> Result<bool, Error> {
 /// [semantic-release readme]:
 ///   https://github.com/semantic-release/semantic-release/blob/master/docs/usage/configuration.md#configuration-file
 pub fn find_semantic_release_configuration(project_root: &Path) -> Result<Option<PathBuf>, Error> {
-    if let Some(config) = find_releaserc_file() {
+    if let Some(config) = find_releaserc_file(project_root) {
         return Ok(Some(config));
     }
-    if let Some(config) = find_release_config_file() {
+    if let Some(config) = find_release_config_file(project_root) {
         return Ok(Some(config));
     }
-    if does_package_manifest_have_release_property()? {
+    if does_package_manifest_have_release_property(project_root)? {
         return Ok(Some(project_root.join("package.json")));
     }
 
