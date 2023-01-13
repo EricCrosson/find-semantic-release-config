@@ -1,18 +1,19 @@
-/// Locate a project's semantic-release configuration.
-///
-/// The configuration rules, according to the [semantic-release readme]:
-///
-/// semantic-release’s options, mode and plugins can be set via either:
-///
-/// - A `.releaserc` file, written in YAML or JSON, with optional extensions: `.yaml`/`.yml`/`.json`/`.js`/`.cjs`
-/// - A `release.config.(js|cjs)` file that exports an object
-/// - A `release` key in the project's package.json file
-///
-/// [semantic-release readme]:
-///   https://github.com/semantic-release/semantic-release/blob/master/docs/usage/configuration.md#configuration-file
+#![forbid(unsafe_code)]
+#![deny(warnings, missing_docs)]
 
-#[forbid(unsafe_code)]
-#[deny(warnings, missing_docs)]
+//! Locate a project's semantic-release configuration.
+//!
+//! The configuration rules, according to the [semantic-release readme]:
+//!
+//! semantic-release’s options, mode and plugins can be set via either:
+//!
+//! - A `.releaserc` file, written in YAML or JSON, with optional extensions: `.yaml`/`.yml`/`.json`/`.js`/`.cjs`
+//! - A `release.config.(js|cjs)` file that exports an object
+//! - A `release` key in the project's package.json file
+//!
+//! [semantic-release readme]:
+//!   https://github.com/semantic-release/semantic-release/blob/master/docs/usage/configuration.md#configuration-file
+
 use std::fs::File;
 use std::io::Read;
 use std::path::{Path, PathBuf};
