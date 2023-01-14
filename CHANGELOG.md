@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/EricCrosson/find-semantic-release-config/compare/v1.0.3...v1.0.4) (2023-01-14)
+
+
+### Bug Fixes
+
+* **deps:** migrate to semantic-release-action/next-release-version ([56f03c2](https://github.com/EricCrosson/find-semantic-release-config/commit/56f03c2a02db4e81fa976715582b3c48245229d0))
+
 ## [1.0.3](https://github.com/EricCrosson/find-semantic-release-config/compare/v1.0.2...v1.0.3) (2023-01-13)
 
 
