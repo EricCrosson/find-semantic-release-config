@@ -73,8 +73,8 @@ fn does_package_manifest_have_release_property(directory: &Path) -> Result<bool,
         .map_err(|err| Error::file_open_error(err, &package_manifest_path))?
         .read_to_string(&mut string)
         .map_err(|err| Error::file_read_error(err, &package_manifest_path))?;
-    let package_manifest: serde_json::Value =
-        serde_json::from_str(&string).map_err(|err| Error::file_parse_error(err))?;
+    let package_manifest: serde_json::Value = serde_json::from_str(&string)
+        .map_err(|err| Error::file_parse_error(err, &package_manifest_path))?;
 
     Ok(package_manifest
         .as_object()
