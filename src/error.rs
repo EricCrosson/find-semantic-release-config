@@ -31,13 +31,13 @@ impl std::fmt::Display for Error {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Error::FileOpenError { source: _, path } => {
-                write!(f, "Unable to open file {:?}", path)
+                write!(f, "unable to open file {:?}", path)
             }
             Error::FileReadError { source: _, path } => {
-                write!(f, "Unable to read file {:?}", path)
+                write!(f, "unable to read file {:?}", path)
             }
             Error::FileParseError { source: _, path } => {
-                write!(f, "Unable to parse file {:?}", path)
+                write!(f, "unable to parse file {:?}", path)
             }
         }
     }
