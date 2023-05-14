@@ -1,5 +1,5 @@
 #![forbid(unsafe_code)]
-#![deny(warnings, missing_docs)]
+#![deny(warnings)]
 
 //! Locate a project's semantic-release configuration.
 //!
@@ -22,7 +22,7 @@ use log::{debug, trace};
 
 mod error;
 
-use error::Error;
+pub use error::Error;
 
 fn find_releaserc_file(directory: &Path) -> Option<PathBuf> {
     let basename = ".releaserc";
