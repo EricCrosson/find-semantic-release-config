@@ -18,8 +18,6 @@ use std::fs::File;
 use std::io::Read;
 use std::path::{Path, PathBuf};
 
-use log::{debug, trace};
-
 mod error;
 
 pub use error::Error;
@@ -31,9 +29,7 @@ fn find_releaserc_file(directory: &Path) -> Option<PathBuf> {
     for extension in extensions {
         let filename = format!("{basename}{extension}");
         let path = directory.join(filename);
-        trace!("Looking for configuration file {}", path.display());
         if path.exists() {
-            debug!("Found semantic-release configuration at {}", path.display());
             return Some(path);
         }
     }
@@ -48,9 +44,7 @@ fn find_release_config_file(directory: &Path) -> Option<PathBuf> {
     for extension in extensions {
         let filename = format!("{basename}.{extension}");
         let path = directory.join(filename);
-        trace!("Looking for configuration file {}", path.display());
         if path.exists() {
-            debug!("Found semantic-release configuration at {}", path.display());
             return Some(path);
         }
     }
@@ -59,7 +53,6 @@ fn find_release_config_file(directory: &Path) -> Option<PathBuf> {
 }
 
 fn does_package_manifest_have_release_property(directory: &Path) -> Result<bool, Error> {
-    trace!("Looking for configuration in package.json");
     let package_manifest_path = directory.join("package.json");
     if !package_manifest_path.exists() {
         return Ok(false);
@@ -105,9 +98,5 @@ pub fn find_semantic_release_configuration(project_root: &Path) -> Result<Option
         return Ok(Some(project_root.join("package.json")));
     }
 
-    trace!(
-        "Did not find semantic-release configuration in {}",
-        project_root.display()
-    );
     Ok(None)
 }
