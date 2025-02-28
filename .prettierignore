@@ -1,1 +1,2 @@
 flake.lock
+tests/test_data/package_json_invalid/package.json
